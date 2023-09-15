@@ -2,10 +2,11 @@ import axios from "axios";
 import React, { useEffect, useState } from 'react'
 import formatDistance from "date-fns/formatDistance";
 import { useSelector } from 'react-redux';
-import { Link } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+
 
 const Tweet = ({tweet, setData}) => {
     const { currentUser } = useSelector((state) => state.user);
@@ -13,7 +14,8 @@ const Tweet = ({tweet, setData}) => {
     const [userData, setUserData] = useState();
 
     const dateStr = formatDistance(new Date(tweet.createdAt), new Date());
-
+    const location = useLocation().pathname;
+    const {id} = useParams();
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -34,6 +36,18 @@ const Tweet = ({tweet, setData}) => {
             const like = await axios.put(`/tweets/${tweet._id}/like`, {
                 id: currentUser._id,
             });
+              
+            if (location.includes("profile")){
+                const newData = await axios.get(`tweets/user/all/${id}`);
+                setData(newData.data);
+            
+            } else if (location.includes("explore")){
+                const newData = await axios.get(`tweets/explore`);
+                setData(newData.data);
+            } else {
+                const newData = await axios.get(`/tweets/timeline/${currentUser._id}`);
+                setData(newData.data);
+            }
           } catch (err) {
             console.log("error",err);
 
