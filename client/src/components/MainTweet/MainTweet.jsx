@@ -1,4 +1,5 @@
 import React from 'react'
+import TimelineTweet from '../TimelineTweet/TimelineTweet';
 
 const MainTweet = () => {
   return( 
@@ -12,7 +13,7 @@ const MainTweet = () => {
             <button className="bg-blue-500 text-white py-2 px-4 rounded-full ml-auto">Tweet</button>
         </form>
 
-        MainTweet
+        <TimelineTweet />
         </div>
   ); 
 };
