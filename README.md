@@ -1,1 +1,1 @@
-# twitter
+The Twitter Clone project is a meticulous and proficient endeavor designed as an interview assessment for IvyKids. This project exemplifies a comprehensive replication of the Twitter platform, utilizing the MERN (MongoDB, Express.js, React, Node.js) stack. The objective was to demonstrate a mastery of modern web development technologies and methodologies.
